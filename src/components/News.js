@@ -35,7 +35,7 @@ const News = (props) => {
     document.title = `${capitalizeFirstLetter(props.category)} - NewsMonkey`;
     updateNews();
     // eslint-disable-next-line
-  }, []);
+  }, [category]);
 
   // const handlePrevClick = async () => {
   //   setPage(page - 1);
@@ -68,7 +68,7 @@ const News = (props) => {
       >
         NewsMonkey - Top {capitalizeFirstLetter(props.category)} Headlines
       </h1>
-      {loading && <Spinner />}
+      {loading}
       <InfiniteScroll
         dataLength={articles.length}
         next={fetchMoreData}
@@ -78,9 +78,9 @@ const News = (props) => {
         <div className="container">
           <div className="row">
             {!loading &&
-              articles.map((element) => {
+              articles.map((element, index) => {
                 return (
-                  <div className="col-md-4" key={element.url}>
+                  <div className="col-md-4" key={index + 1}>
                     <NewsItem
                       title={element.title ? element.title : ""}
                       description={
